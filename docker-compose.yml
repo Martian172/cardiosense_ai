@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cardiosense-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-changeme-generate-a-real-secret-key-32-chars}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-2.5-flash}
+      - DATABASE_URL=sqlite+aiosqlite:///./cardiosense.db
+      - MODEL_PATH=app/ml/ecg_autoencoder.pt
+      - ANOMALY_THRESHOLD=0.05
+      - CORS_ORIGINS=["http://localhost:5173","http://localhost:80"]
+    volumes:
+      - cardiosense_db:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: cardiosense-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  cardiosense_db:

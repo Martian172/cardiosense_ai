@@ -1,0 +1,247 @@
+/* ── Google Fonts are loaded in index.html ── */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ────────────────────────────────────────────────── */
+:root {
+  --color-bg: #0a0f1e;
+  --color-surface: #0d1530;
+  --color-primary: #00d4aa;
+  --color-secondary: #6366f1;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-text: #f1f5f9;
+  --color-muted: #94a3b8;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  color-scheme: dark;
+}
+
+/* ── Base Reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Custom Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 170, 0.3);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+/* ── Glassmorphism Utilities ──────────────────────────────────────────────── */
+@layer components {
+  .glass-card {
+    @apply rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl;
+  }
+
+  .glass-button {
+    @apply rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm
+           hover:bg-white/10 hover:border-white/20 transition-all duration-200;
+  }
+
+  .glass-input {
+    @apply rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm
+           focus:border-primary/50 focus:ring-2 focus:ring-primary/20
+           text-slate-100 placeholder:text-slate-600
+           transition-all duration-200;
+  }
+}
+
+/* ── Glow Effects ─────────────────────────────────────────────────────────── */
+@layer utilities {
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(0, 212, 170, 0.4), 0 0 40px rgba(0, 212, 170, 0.1);
+  }
+
+  .glow-danger {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4), 0 0 40px rgba(239, 68, 68, 0.1);
+  }
+
+  .glow-secondary {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 40px rgba(99, 102, 241, 0.1);
+  }
+
+  .text-gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary), #00b8d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-duo {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ── Animated Gradient Background ────────────────────────────────────────── */
+.gradient-bg-animated {
+  background: linear-gradient(
+    -45deg,
+    #0a0f1e,
+    #0d1530,
+    #0a1628,
+    #060c1a
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── ECG Waveform Keyframes ───────────────────────────────────────────────── */
+@keyframes ecgPulse {
+  0%, 100% {
+    opacity: 0.4;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes scanLineMove {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+/* ── Selection ────────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(0, 212, 170, 0.25);
+  color: #f1f5f9;
+}
+
+/* ── Focus styles ─────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(0, 212, 170, 0.6);
+  outline-offset: 2px;
+}
+
+/* ── Recharts overrides for dark theme ───────────────────────────────────── */
+.recharts-default-tooltip {
+  background: #0d1530 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+}
+
+.recharts-tooltip-label {
+  color: #94a3b8 !important;
+}
+
+.recharts-legend-item-text {
+  color: #94a3b8 !important;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: #64748b !important;
+}
+
+/* ── Framer Motion page container ─────────────────────────────────────────── */
+.page-container {
+  min-height: calc(100vh - 64px);
+}
+
+/* ── ECG scan line animation ──────────────────────────────────────────────── */
+.ecg-scan-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--color-primary), transparent);
+  animation: scanLineMove 3s linear infinite;
+  opacity: 0.4;
+}
+
+/* ── Noise texture overlay ────────────────────────────────────────────────── */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ── Animation delays ─────────────────────────────────────────────────────── */
+.animation-delay-150 {
+  animation-delay: 150ms;
+}
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+/* ── Monospace code blocks ────────────────────────────────────────────────── */
+code, kbd, pre {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+}
+
+/* ── Shimmer loading animation ────────────────────────────────────────────── */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
