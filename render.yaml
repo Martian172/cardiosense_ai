@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: cardiosense-ai
+    runtime: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      python -m app.ml.train_mock
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./cardiosense.db
+      - key: MODEL_PATH
+        value: app/ml/ecg_autoencoder.pt
+      - key: ANOMALY_THRESHOLD
+        value: "0.05"
+      - key: CORS_ORIGINS
+        value: '["https://cardiosense-ai.vercel.app","http://localhost:5173"]'
+      - key: PYTHON_VERSION
+        value: "3.11.0"
