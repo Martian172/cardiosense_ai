@@ -55,7 +55,13 @@ class Settings(BaseSettings):
     ECG_SAMPLE_RATE: int = 250     # Hz
 
     # ── CORS ──────────────────────────────────────────────────────────────────
-    CORS_ORIGINS: list[str] = ["http://localhost:5173", "http://localhost:3000"]
+    CORS_ORIGINS: list[str] = [
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://cardiosense-ai.vercel.app",
+        "https://cardiosense-ai-martian172.vercel.app",
+    ]
+
 
     # ── ChromaDB ──────────────────────────────────────────────────────────────
     CHROMA_PERSIST_DIR: str = "./chroma_db"
