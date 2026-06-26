@@ -23,7 +23,7 @@
 
 | Service | URL |
 |---------|-----|
-| **Frontend (Vercel)** | https://cardiosense-p5vv6048m-dr-cardio.vercel.app |
+| **Frontend (Vercel)** | [https://cardiosense-p5vv6048m-dr-cardio.vercel.app](https://cardiosenseai-neon.vercel.app/dashboard) |
 | **Backend API (Render)** | https://cardiosense-ai-mscx.onrender.com |
 | **Interactive API Docs** | https://cardiosense-ai-mscx.onrender.com/docs |
 | **Health Check** | https://cardiosense-ai-mscx.onrender.com/health |
@@ -168,7 +168,7 @@ npm run dev
 ```
 
 ### 4. Open the app
--**Frontend (Vercel)** https://cardiosense-p5vv6048m-dr-cardio.vercel.app
+-**Frontend (Vercel)** (https://cardiosenseai-neon.vercel.app/dashboard)
 **Backend API (Render)** 	https://cardiosense-ai-mscx.onrender.com
 **Interactive API Docs**	https://cardiosense-ai-mscx.onrender.com/docs
 **Health Check**	https://cardiosense-ai-mscx.onrender.com/health
@@ -185,8 +185,8 @@ cp .env.example .env
 # Build and start all services
 docker-compose up --build
 
-# App: http://localhost:5173
-# API: http://localhost:8000
+# App: https://cardiosenseai-neon.vercel.app/dashboard
+ 
 ```
 
 ---
