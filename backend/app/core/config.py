@@ -58,9 +58,10 @@ class Settings(BaseSettings):
     CORS_ORIGINS: list[str] = [
         "http://localhost:5173",
         "http://localhost:3000",
-        # Render backend (self)
+        # Render backend
         "https://cardiosense-ai-mscx.onrender.com",
-        # Vercel frontend (all possible deployment URLs)
+        # Vercel frontend — all deployment URLs
+        "https://cardiosense-p5vv6048m-dr-cardio.vercel.app",
         "https://cardiosense-ai.vercel.app",
         "https://cardiosense-ai-martian172.vercel.app",
         "https://cardiosense-ai-git-main-martian172.vercel.app",
