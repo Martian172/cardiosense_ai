@@ -15,11 +15,13 @@ _DEFAULT_CORS_ORIGINS = ",".join([
     "http://localhost:5173",
     "http://localhost:3000",
     "https://cardiosense-ai-mscx.onrender.com",
+    "https://cardiosenseai-neon.vercel.app",
     "https://cardiosense-p5vv6048m-dr-cardio.vercel.app",
     "https://cardiosense-ai.vercel.app",
     "https://cardiosense-ai-martian172.vercel.app",
     "https://cardiosense-ai-git-main-martian172.vercel.app",
 ])
+
 
 
 class Settings(BaseSettings):
