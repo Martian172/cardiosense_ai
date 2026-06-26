@@ -10,7 +10,6 @@ services:
       pip install "torch==2.12.1+cpu" --index-url https://download.pytorch.org/whl/cpu
       pip install -r requirements.txt
       python -m app.ml.train_mock
-
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
@@ -27,6 +26,6 @@ services:
       - key: ANOMALY_THRESHOLD
         value: "0.05"
       - key: CORS_ORIGINS
-        value: '["https://cardiosense-ai.vercel.app","https://cardiosense-ai-martian172.vercel.app","https://cardiosense-ai-git-main-martian172.vercel.app","http://localhost:5173"]'
+        value: "https://cardiosense-p5vv6048m-dr-cardio.vercel.app,https://cardiosense-ai-mscx.onrender.com,http://localhost:5173"
       - key: PYTHON_VERSION
         value: "3.11.0"
