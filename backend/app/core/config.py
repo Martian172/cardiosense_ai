@@ -7,11 +7,19 @@ Never hardcode secrets; always use this module to access configuration.
 
 from __future__ import annotations
 
-import json
-from typing import Any
-
-from pydantic import field_validator, model_validator
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# All allowed origins — hardcoded so pydantic-settings never has to parse a list from env
+_DEFAULT_CORS_ORIGINS = ",".join([
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://cardiosense-ai-mscx.onrender.com",
+    "https://cardiosense-p5vv6048m-dr-cardio.vercel.app",
+    "https://cardiosense-ai.vercel.app",
+    "https://cardiosense-ai-martian172.vercel.app",
+    "https://cardiosense-ai-git-main-martian172.vercel.app",
+])
 
 
 class Settings(BaseSettings):
@@ -46,7 +54,7 @@ class Settings(BaseSettings):
 
     # ── Google Gemini / LangChain ──────────────────────────────────────────────
     GEMINI_API_KEY: str = ""
-    GEMINI_MODEL: str = "gemini-1.5-flash"
+    GEMINI_MODEL: str = "gemini-2.5-flash"
 
     # ── ML Model ──────────────────────────────────────────────────────────────
     MODEL_PATH: str = "app/ml/ecg_autoencoder.pt"
@@ -54,36 +62,14 @@ class Settings(BaseSettings):
     ECG_SEGMENT_LENGTH: int = 500  # samples per inference window (2 s @ 250 Hz)
     ECG_SAMPLE_RATE: int = 250     # Hz
 
-    # ── CORS ──────────────────────────────────────────────────────────────────
-    CORS_ORIGINS: list[str] = [
-        "http://localhost:5173",
-        "http://localhost:3000",
-        # Render backend
-        "https://cardiosense-ai-mscx.onrender.com",
-        # Vercel frontend — all deployment URLs
-        "https://cardiosense-p5vv6048m-dr-cardio.vercel.app",
-        "https://cardiosense-ai.vercel.app",
-        "https://cardiosense-ai-martian172.vercel.app",
-        "https://cardiosense-ai-git-main-martian172.vercel.app",
-    ]
-
-
+    # ── CORS — stored as plain str, parsed into list by cors_origins property ──
+    # Use comma-separated string to avoid pydantic-settings v2 JSON parse issues
+    CORS_ORIGINS_STR: str = _DEFAULT_CORS_ORIGINS
 
     # ── ChromaDB ──────────────────────────────────────────────────────────────
     CHROMA_PERSIST_DIR: str = "./chroma_db"
 
     # ── Validators ────────────────────────────────────────────────────────────
-    @field_validator("CORS_ORIGINS", mode="before")
-    @classmethod
-    def parse_cors_origins(cls, v: Any) -> list[str]:
-        """Accept CORS_ORIGINS as a JSON array string or a comma-separated list."""
-        if isinstance(v, str):
-            v = v.strip()
-            if v.startswith("["):
-                return json.loads(v)
-            return [origin.strip() for origin in v.split(",") if origin.strip()]
-        return v
-
     @model_validator(mode="after")
     def warn_insecure_secret(self) -> "Settings":
         """Emit a warning if the default (insecure) secret key is still in use."""
@@ -95,6 +81,15 @@ class Settings(BaseSettings):
                 stacklevel=2,
             )
         return self
+
+    @property
+    def CORS_ORIGINS(self) -> list[str]:
+        """Parse CORS_ORIGINS_STR into a list of allowed origins."""
+        raw = self.CORS_ORIGINS_STR.strip()
+        if raw.startswith("["):
+            import json
+            return json.loads(raw)
+        return [o.strip() for o in raw.split(",") if o.strip()]
 
 
 # Module-level singleton — import this everywhere instead of re-instantiating.
