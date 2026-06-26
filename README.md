@@ -5,15 +5,30 @@
 ![CardioSense AI](https://img.shields.io/badge/CardioSense-AI-00d4aa?style=for-the-badge&logo=heart&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.137-009688?style=for-the-badge&logo=fastapi)
 ![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.6-EE4C2C?style=for-the-badge&logo=pytorch)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.12-EE4C2C?style=for-the-badge&logo=pytorch)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.2-3178C6?style=for-the-badge&logo=typescript)
 ![Gemini](https://img.shields.io/badge/Gemini-2.5_Flash-4285F4?style=for-the-badge&logo=google)
+![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=for-the-badge&logo=vercel)
+![Render](https://img.shields.io/badge/API-Render-46E3B7?style=for-the-badge&logo=render)
 
 **Production-grade ECG Anomaly Detection SaaS powered by Deep Learning & Generative AI**
 
-[Live Demo](#) · [API Docs](http://localhost:8000/docs) · [Report Bug](https://github.com/Martian172/cardiosense-ai/issues)
+[🚀 Live Demo](https://cardiosense-p5vv6048m-dr-cardio.vercel.app) · [📖 API Docs](https://cardiosense-ai-mscx.onrender.com/docs) · [🔍 Health Check](https://cardiosense-ai-mscx.onrender.com/health) · [Report Bug](https://github.com/Martian172/cardiosense_ai/issues)
 
 </div>
+
+---
+
+## 🌐 Live Deployment
+
+| Service | URL |
+|---------|-----|
+| **Frontend (Vercel)** | https://cardiosense-p5vv6048m-dr-cardio.vercel.app |
+| **Backend API (Render)** | https://cardiosense-ai-mscx.onrender.com |
+| **Interactive API Docs** | https://cardiosense-ai-mscx.onrender.com/docs |
+| **Health Check** | https://cardiosense-ai-mscx.onrender.com/health |
+
+> ⚠️ The backend runs on Render's **free tier** — the first request after 15 min of inactivity may take ~30 seconds to wake up.
 
 ---
 
@@ -86,7 +101,7 @@ The platform includes:
 
 | Layer | Technology |
 |-------|-----------|
-| **ML Model** | PyTorch 2.6 — 1D Conv Autoencoder |
+| **ML Model** | PyTorch 2.12 — 1D Conv Autoencoder |
 | **Backend** | FastAPI 0.137, Uvicorn, SQLAlchemy 2.0 async |
 | **Auth** | JWT (python-jose) + bcrypt |
 | **Database** | SQLite (dev) / PostgreSQL (prod) via aiosqlite |
@@ -95,11 +110,12 @@ The platform includes:
 | **State** | TanStack Query v5 (server) + Zustand (client) |
 | **Charts** | Recharts, Framer Motion |
 | **Styling** | Tailwind CSS, glassmorphism design |
+| **Hosting** | Vercel (frontend) + Render (backend) |
 | **Containers** | Docker, docker-compose |
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Local Development)
 
 ### Prerequisites
 - Python 3.11+ and pip
@@ -108,8 +124,8 @@ The platform includes:
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/Martian172/cardiosense-ai.git
-cd cardiosense-ai
+git clone https://github.com/Martian172/cardiosense_ai.git
+cd cardiosense_ai
 ```
 
 ### 2. Backend setup
@@ -121,7 +137,8 @@ python -m venv .venv
 .venv\Scripts\activate          # Windows
 # source .venv/bin/activate     # macOS/Linux
 
-# Install dependencies
+# Install PyTorch CPU + dependencies
+pip install torch==2.12.1+cpu --index-url https://download.pytorch.org/whl/cpu
 pip install -r requirements.txt
 
 # Configure environment
@@ -143,7 +160,8 @@ cd frontend
 npm install
 
 # Configure environment
-cp .env.example .env
+cp .env.example .env.local
+# Set VITE_API_URL=http://localhost:8000
 
 # Start the dev server
 npm run dev
@@ -190,9 +208,6 @@ DATABASE_URL=sqlite+aiosqlite:///./cardiosense.db
 # ML Model
 MODEL_PATH=app/ml/ecg_autoencoder.pt
 ANOMALY_THRESHOLD=0.05
-
-# CORS
-CORS_ORIGINS=["http://localhost:5173"]
 ```
 
 Get a free Gemini API key at: https://aistudio.google.com/apikey
@@ -238,7 +253,7 @@ Output: (batch, 1, 500) — reconstructed signal
 ## 📁 Project Structure
 
 ```
-cardiosense-ai/
+cardiosense_ai/
 ├── backend/                    # FastAPI backend
 │   ├── app/
 │   │   ├── core/               # Config, database, security
@@ -263,8 +278,10 @@ cardiosense-ai/
 │   │   └── types/              # TypeScript interfaces
 │   ├── package.json
 │   ├── vite.config.ts
+│   ├── vercel.json
 │   ├── Dockerfile
 │   └── .env.example
+├── render.yaml                 # Render.com backend deployment config
 ├── docker-compose.yml
 ├── .gitignore
 └── README.md
@@ -288,7 +305,7 @@ cardiosense-ai/
 | WS | `/ws/ecg-stream` | No | Real-time ECG stream |
 | GET | `/health` | No | Service health check |
 
-Full interactive docs: **http://localhost:8000/docs**
+Full interactive docs: **https://cardiosense-ai-mscx.onrender.com/docs**
 
 ---
 
@@ -323,6 +340,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 Built by **Martian172** as a portfolio/showcase project demonstrating full-stack ML engineering skills.
 
 - 🔗 GitHub: [@Martian172](https://github.com/Martian172)
+- 🌐 Live: [cardiosense-p5vv6048m-dr-cardio.vercel.app](https://cardiosense-p5vv6048m-dr-cardio.vercel.app)
 
 ---
 
