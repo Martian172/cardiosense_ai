@@ -27,6 +27,6 @@ services:
       - key: ANOMALY_THRESHOLD
         value: "0.05"
       - key: CORS_ORIGINS
-        value: '["https://cardiosense-ai.vercel.app","http://localhost:5173"]'
+        value: '["https://cardiosense-ai.vercel.app","https://cardiosense-ai-martian172.vercel.app","https://cardiosense-ai-git-main-martian172.vercel.app","http://localhost:5173"]'
       - key: PYTHON_VERSION
         value: "3.11.0"
