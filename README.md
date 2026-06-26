@@ -168,7 +168,7 @@ npm run dev
 ```
 
 ### 4. Open the app
-- **Frontend**: http://localhost:5173
+- **Frontend**:  (Vercel)	https://cardiosense-p5vv6048m-dr-cardio.vercel.app
 - **API Docs**: http://localhost:8000/docs
 - **Health**: http://localhost:8000/health
 
