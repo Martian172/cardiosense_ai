@@ -13,7 +13,7 @@
 
 **Production-grade ECG Anomaly Detection SaaS powered by Deep Learning & Generative AI**
 
-[🚀 Live Demo](https://cardiosense-p5vv6048m-dr-cardio.vercel.app) · [📖 API Docs](https://cardiosense-ai-mscx.onrender.com/docs) · [🔍 Health Check](https://cardiosense-ai-mscx.onrender.com/health) · [Report Bug](https://github.com/Martian172/cardiosense_ai/issues)
+[🚀 Live Demo](https://cardiosenseai-neon.vercel.app) · [📖 API Docs](https://cardiosense-ai-mscx.onrender.com/docs) · [🔍 Health Check](https://cardiosense-ai-mscx.onrender.com/health) · [Report Bug](https://github.com/Martian172/cardiosense_ai/issues)
 
 </div>
 
@@ -23,7 +23,7 @@
 
 | Service | URL |
 |---------|-----|
-| **Frontend (Vercel)** | [https://cardiosense-p5vv6048m-dr-cardio.vercel.app](https://cardiosenseai-neon.vercel.app/dashboard) |
+| **Frontend (Vercel)** | [https://cardiosenseai-neon.vercel.app](https://cardiosenseai-neon.vercel.app/dashboard) |
 | **Backend API (Render)** | https://cardiosense-ai-mscx.onrender.com |
 | **Interactive API Docs** | https://cardiosense-ai-mscx.onrender.com/docs |
 | **Health Check** | https://cardiosense-ai-mscx.onrender.com/health |
@@ -341,7 +341,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 Built by **Martian172** as a portfolio/showcase project demonstrating full-stack ML engineering skills.
 
 - 🔗 GitHub: [@Martian172](https://github.com/Martian172)
-- 🌐 Live: [cardiosense-p5vv6048m-dr-cardio.vercel.app](https://cardiosense-p5vv6048m-dr-cardio.vercel.app)
+- 🌐 Live: [cardiosenseai-neon.vercel.app](https://cardiosenseai-neon.vercel.app)
 
 ---
 
